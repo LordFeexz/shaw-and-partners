@@ -45,7 +45,7 @@ describe("get User Data", () => {
   test("success with parameter since", async () => {
     const result = await request(app).get(`/api/users`).query({ since: 100 });
     expect(result.status).toBe(200);
-    expect(result.body.length).toBe(5);
+    expect(result.body.length).toBe(10);
     expect(result.body).toBeInstanceOf(Array);
     expect(result.body[0]).toBeInstanceOf(Object);
     expect(result.body[0]).toHaveProperty("login", expect.any(String));
