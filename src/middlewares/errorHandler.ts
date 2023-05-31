@@ -14,6 +14,13 @@ export const errorHandler: ErrorRequestHandler = (
       message = err.msg;
       status = 400;
       break;
+    case "Not Found":
+      message = err.msg;
+      status = 404;
+      break;
+    case "Forbidden":
+      message = err.msg;
+      status = 403;
     default:
       message = "Internal Server Error";
       status = 500;

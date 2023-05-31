@@ -7,7 +7,7 @@ class Router extends BaseRoutes {
     this.router
       .use(queryFilter)
       .get("/api/users", Controller.getUsers)
-      .get("/api/users/:username/detail")
+      .get("/api/users/:username/detail", Controller.getUserByUsername)
       .get("/api/users/:username/repos");
   }
 }

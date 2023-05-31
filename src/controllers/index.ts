@@ -25,4 +25,25 @@ export default class Controller {
       next(err);
     }
   }
+
+  public static async getUserByUsername(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const { username } = req.params;
+      const user = await Api.getUserByUsername(username);
+
+      if ((await user).response && (await user).response.status === 404)
+        throw { name: "Not Found", msg: "Data not found" };
+
+      if ((await user).response && (await user).response.status === 403)
+        throw { name: "Forbidden", msg: "Limit Api Call" };
+
+      res.status(200).json(user);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
