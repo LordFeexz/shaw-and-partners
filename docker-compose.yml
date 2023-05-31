@@ -1,0 +1,10 @@
+version: '1.0'
+
+services:
+  shaw-and-partners-test:
+    container_name: shaw-and-partners-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
