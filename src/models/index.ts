@@ -1,5 +1,6 @@
 import axios from "axios";
 import User from "./user";
+import Repos from "./repos";
 
 export default class Api {
   public static async getAllUser(
@@ -25,6 +26,19 @@ export default class Api {
       const { data } = await axios({
         method: "GET",
         url: `https://api.github.com/users/${username}`,
+      });
+
+      return data;
+    } catch (err) {
+      return err;
+    }
+  }
+
+  public static async getUserRepo(username: string): Promise<Repos[] | any> {
+    try {
+      const { data } = await axios<Repos>({
+        method: "get",
+        url: `https://api.github.com/users/${username}/repos`,
       });
 
       return data;

@@ -46,4 +46,26 @@ export default class Controller {
       next(err);
     }
   }
+
+  public static async getUserRepos(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const { username } = req.params;
+
+      const repo = await Api.getUserRepo(username);
+
+      if (!(await repo).length)
+        throw { name: "Not Found", msg: "Data not found" };
+
+      if ((await repo).response && (await repo).response.status === 403)
+        throw { name: "Forbidden", msg: "Limit Api Call" };
+
+      res.status(200).json(repo);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
